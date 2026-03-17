@@ -10,7 +10,7 @@ import SwiftUI
 ///     image: Image("ceremony-garden"),
 ///     icon: Image(systemName: "leaf.fill"),
 ///     title: "Garden Ceremonies",
-///     body: "Exchange vows beneath a canopy of wisteria and climbing roses."
+///     description: "Exchange vows beneath a canopy of wisteria and climbing roses."
 /// )
 /// ```
 public struct FeatureCard: View {
@@ -20,7 +20,7 @@ public struct FeatureCard: View {
     private let image: Image?
     private let icon: Image?
     private let title: String
-    private let body: String
+    private let description: String
     private let onTap: (() -> Void)?
 
     // MARK: - Init
@@ -29,13 +29,13 @@ public struct FeatureCard: View {
         image: Image? = nil,
         icon: Image? = nil,
         title: String,
-        body: String,
+        description: String,
         onTap: (() -> Void)? = nil
     ) {
         self.image = image
         self.icon = icon
         self.title = title
-        self.body = body
+        self.description = description
         self.onTap = onTap
     }
 
@@ -51,7 +51,7 @@ public struct FeatureCard: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(title). \(body)")
+        .accessibilityLabel("\(title). \(description)")
         .accessibilityAddTraits(onTap != nil ? .isButton : [])
     }
 
@@ -80,7 +80,7 @@ public struct FeatureCard: View {
                         .foregroundStyle(SpringColor.Text.primary)
                 }
 
-                Text(body)
+                Text(description)
                     .font(SpringFont.prose(size: SpringFontSize.body))
                     .foregroundStyle(SpringColor.Text.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -105,22 +105,22 @@ public struct FeatureCard: View {
             FeatureCard(
                 icon: Image(systemName: "leaf.fill"),
                 title: "Garden Ceremonies",
-                body: "Exchange vows beneath a canopy of wisteria and climbing roses."
+                description: "Exchange vows beneath a canopy of wisteria and climbing roses."
             )
             FeatureCard(
                 icon: Image(systemName: "fork.knife"),
                 title: "Fine Dining",
-                body: "A seasonally-changing menu celebrating local produce and craft wines."
+                description: "A seasonally-changing menu celebrating local produce and craft wines."
             )
             FeatureCard(
                 icon: Image(systemName: "wineglass.fill"),
                 title: "Private Wine Tastings",
-                body: "Curated cellar tours and guided tastings for intimate groups."
+                description: "Curated cellar tours and guided tastings for intimate groups."
             )
             FeatureCard(
                 icon: Image(systemName: "music.note"),
                 title: "Live Entertainment",
-                body: "From string quartets to jazz ensembles for every occasion."
+                description: "From string quartets to jazz ensembles for every occasion."
             )
         }
         .padding(SpringSpacing.Horizontal.md)

@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 
@@ -10,6 +10,7 @@ let package = Package(
     products: [
         .library(
             name: "SpringKit",
+            type: .dynamic,
             targets: ["SpringKit"]
         )
     ],
@@ -24,6 +25,18 @@ let package = Package(
         .testTarget(
             name: "SpringKitTests",
             dependencies: ["SpringKit"]
+        ),
+        .plugin(
+            name: "BuildXCFramework",
+            capability: .command(
+                intent: .custom(
+                    verb: "build-xcframework",
+                    description: "Build SpringKit.xcframework for iOS device and Simulator"
+                ),
+                permissions: [
+                    .writeToPackageDirectory(reason: "Writes XCFramework and build artifacts to build/")
+                ]
+            )
         )
     ]
 )

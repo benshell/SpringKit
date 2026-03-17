@@ -90,10 +90,22 @@ private struct SpringGlassModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .glassEffect(
-                variant.glassEffect,
-                in: .rect(cornerRadius: cornerRadius)
-            )
+            .glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
+            .overlay(variantTint(cornerRadius: cornerRadius))
+    }
+
+    @ViewBuilder
+    private func variantTint(cornerRadius: CGFloat) -> some View {
+        switch variant {
+        case .default, .thin, .thick:
+            EmptyView()
+        case .forest:
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(SpringColor.Object.primary.opacity(0.12))
+        case .harvest:
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(SpringColor.Object.accent.opacity(0.12))
+        }
     }
 }
 
@@ -104,10 +116,7 @@ private struct SpringGlassCardModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(SpringSpacing.Vertical.md)
-            .glassEffect(
-                variant.glassEffect,
-                in: .rect(cornerRadius: cornerRadius)
-            )
+            .glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
             .shadow(
                 color: SpringColor.Object.primary.opacity(0.08),
                 radius: 12,
@@ -129,20 +138,6 @@ private struct SpringNavigationMaterialModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .glassEffect(.regular, in: .rect)
-    }
-}
-
-// MARK: - GlassEffect Extensions
-
-private extension SpringMaterial.Variant {
-    var glassEffect: GlassEffect {
-        switch self {
-        case .default:  .regular
-        case .thin:     .regular.interactive()
-        case .thick:    .regular
-        case .forest:   .regular.tinted(SpringColor.Object.primary)
-        case .harvest:  .regular.tinted(SpringColor.Object.accent)
-        }
     }
 }
 

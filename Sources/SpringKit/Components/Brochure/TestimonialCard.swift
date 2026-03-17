@@ -61,7 +61,7 @@ public struct TestimonialCard: View {
             .accessibilityLabel("\(rating) out of 5 stars")
 
             // Quote
-            Text(""\(quote)"")
+            Text("\u{201C}\(quote)\u{201D}")
                 .font(SpringFont.prose(size: SpringFontSize.callout, weight: .light))
                 .foregroundStyle(SpringColor.Text.primary)
                 .italic()
@@ -108,7 +108,7 @@ public struct TestimonialCard: View {
         )
         .shadow(color: SpringColor.Object.primary.opacity(0.06), radius: 10, x: 0, y: 3)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(rating) stars. "\(quote)" — \(attribution)\(subtitle.map { ", \($0)" } ?? "")")
+        .accessibilityLabel("\(rating) stars. \u{201C}\(quote)\u{201D} \u{2014} \(attribution)\(subtitle.map { ", \($0)" } ?? "")")
     }
 }
 
