@@ -25,6 +25,7 @@ struct CardsTab: View {
                         subtitle: "BookingCard — all status variants",
                         alignment: .leading
                     )
+                    .padding(.horizontal, SpringSpacing.Horizontal.md)
 
                     LazyVGrid(columns: cardColumns, spacing: SpringSpacing.Vertical.md) {
                         ForEach(DemoContent.sampleBookings) { booking in
@@ -43,6 +44,7 @@ struct CardsTab: View {
                         subtitle: "OrderCard — with quantity controls",
                         alignment: .leading
                     )
+                    .padding(.horizontal, SpringSpacing.Horizontal.md)
 
                     LazyVGrid(columns: cardColumns, spacing: SpringSpacing.Vertical.md) {
                         ForEach(DemoContent.menuItems) { item in
@@ -72,6 +74,7 @@ struct CardsTab: View {
                         subtitle: "InquiryCard — all status variants",
                         alignment: .leading
                     )
+                    .padding(.horizontal, SpringSpacing.Horizontal.md)
 
                     LazyVGrid(columns: cardColumns, spacing: SpringSpacing.Vertical.md) {
                         ForEach(DemoContent.sampleInquiries) { inquiry in
