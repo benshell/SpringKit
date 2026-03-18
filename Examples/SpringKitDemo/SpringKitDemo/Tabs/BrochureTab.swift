@@ -2,6 +2,12 @@ import SwiftUI
 import SpringKit
 
 struct BrochureTab: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
+
+    private var galleryColumns: Int {
+        sizeClass == .regular ? 3 : 2
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -48,17 +54,8 @@ struct BrochureTab: View {
                         subtitle: "What our guests are saying"
                     )
 
-                    VStack(spacing: SpringSpacing.Vertical.md) {
-                        ForEach(DemoContent.testimonials) { testimonial in
-                            TestimonialCard(
-                                quote: testimonial.quote,
-                                attribution: testimonial.name,
-                                subtitle: testimonial.subtitle,
-                                rating: testimonial.rating
-                            )
-                        }
-                    }
-                    .padding(.horizontal, SpringSpacing.Horizontal.md)
+                    testimonials
+                        .readableContentWidth()
 
                     SectionHeader(
                         title: "Gallery",
@@ -67,7 +64,7 @@ struct BrochureTab: View {
 
                     GalleryGrid(
                         images: DemoContent.galleryImages,
-                        columns: 2,
+                        columns: galleryColumns,
                         layout: .uniform(imageHeight: 160)
                     )
 
@@ -91,6 +88,20 @@ struct BrochureTab: View {
             .navigationTitle("Brochure Components")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+
+    private var testimonials: some View {
+        VStack(spacing: SpringSpacing.Vertical.md) {
+            ForEach(DemoContent.testimonials) { testimonial in
+                TestimonialCard(
+                    quote: testimonial.quote,
+                    attribution: testimonial.name,
+                    subtitle: testimonial.subtitle,
+                    rating: testimonial.rating
+                )
+            }
+        }
+        .padding(.horizontal, SpringSpacing.Horizontal.md)
     }
 }
 

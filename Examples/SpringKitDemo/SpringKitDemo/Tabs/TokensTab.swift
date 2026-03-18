@@ -2,6 +2,8 @@ import SwiftUI
 import SpringKit
 
 struct TokensTab: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -70,6 +72,7 @@ struct TokensTab: View {
                     .padding(.horizontal, SpringSpacing.Horizontal.md)
                 }
                 .padding(.vertical, SpringSpacing.Vertical.md)
+                .readableContentWidth(900)
             }
             .background(SpringColor.Background.primary)
             .navigationTitle("Design Tokens")
@@ -80,14 +83,17 @@ struct TokensTab: View {
     // MARK: - Helpers
 
     private func colorSection(title: String, tokens: [(String, Color)]) -> some View {
-        VStack(alignment: .leading, spacing: SpringSpacing.Vertical.sm) {
+        let columnCount = sizeClass == .regular ? 6 : 3
+        let columns = Array(repeating: GridItem(.flexible()), count: columnCount)
+
+        return VStack(alignment: .leading, spacing: SpringSpacing.Vertical.sm) {
             Text(title)
                 .springProseFont(size: SpringFontSize.footnote, weight: .semibold)
                 .foregroundStyle(SpringColor.Text.secondary)
                 .padding(.horizontal, SpringSpacing.Horizontal.md)
 
             LazyVGrid(
-                columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())],
+                columns: columns,
                 spacing: SpringSpacing.Vertical.sm
             ) {
                 ForEach(tokens, id: \.0) { name, color in

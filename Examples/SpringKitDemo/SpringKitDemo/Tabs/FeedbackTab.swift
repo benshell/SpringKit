@@ -122,6 +122,7 @@ struct FeedbackTab: View {
                     .padding(.horizontal, SpringSpacing.Horizontal.md)
                 }
                 .padding(.vertical, SpringSpacing.Vertical.md)
+                .readableContentWidth()
             }
             .background(SpringColor.Background.primary)
             .navigationTitle("Feedback & Status")

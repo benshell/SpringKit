@@ -2,7 +2,16 @@ import SwiftUI
 import SpringKit
 
 struct CardsTab: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var orderQuantities: [String: Int] = [:]
+
+    private var cardColumns: [GridItem] {
+        if sizeClass == .regular {
+            [GridItem(.flexible()), GridItem(.flexible())]
+        } else {
+            [GridItem(.flexible())]
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -17,7 +26,7 @@ struct CardsTab: View {
                         alignment: .leading
                     )
 
-                    VStack(spacing: SpringSpacing.Vertical.md) {
+                    LazyVGrid(columns: cardColumns, spacing: SpringSpacing.Vertical.md) {
                         ForEach(DemoContent.sampleBookings) { booking in
                             BookingCard(booking: booking) {}
                         }
@@ -35,7 +44,7 @@ struct CardsTab: View {
                         alignment: .leading
                     )
 
-                    VStack(spacing: SpringSpacing.Vertical.md) {
+                    LazyVGrid(columns: cardColumns, spacing: SpringSpacing.Vertical.md) {
                         ForEach(DemoContent.menuItems) { item in
                             OrderCard(
                                 item: item,
@@ -64,7 +73,7 @@ struct CardsTab: View {
                         alignment: .leading
                     )
 
-                    VStack(spacing: SpringSpacing.Vertical.md) {
+                    LazyVGrid(columns: cardColumns, spacing: SpringSpacing.Vertical.md) {
                         ForEach(DemoContent.sampleInquiries) { inquiry in
                             InquiryCard(inquiry: inquiry) {}
                         }
