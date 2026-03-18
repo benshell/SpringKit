@@ -7,7 +7,7 @@
 ![SPM](https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen?logo=swift&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-<img src="Media/demo.gif" alt="SpringKit demo app cycling through Brochure, Controls, Cards, Feedback, and Tokens tabs" width="300" align="right" hspace="16">
+<img src="Media/demo.gif" alt="SpringKit demo app cycling through Brochure, Controls, Cards, Feedback, and Tokens tabs" width="300" align="right">
 
 A SwiftUI design system for iOS — suitable for organizations like vineyard estates, wedding venues, and upscale restaurants. SpringKit provides a complete design foundation: semantic color tokens, typography, spacing, Liquid Glass materials, and a full library of pre-built SwiftUI components, all in one zero-dependency Swift package.
 
