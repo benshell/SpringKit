@@ -17,7 +17,7 @@ public struct SpringToast: View {
 
     // MARK: - Message Model
 
-    public struct Message: Equatable {
+    public struct Message: Equatable, Sendable {
         public var text: String
         public var style: Style
         public var duration: TimeInterval
@@ -35,7 +35,7 @@ public struct SpringToast: View {
 
     // MARK: - Style
 
-    public enum Style {
+    @frozen public enum Style: Sendable {
         case success
         case info
         case warning
@@ -89,6 +89,7 @@ public extension View {
 
 private struct SpringToastModifier: ViewModifier {
     @Binding var message: SpringToast.Message?
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
 
     func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
@@ -99,11 +100,12 @@ private struct SpringToastModifier: ViewModifier {
                     .padding(.bottom, SpringSpacing.Vertical.xl)
                     .padding(.horizontal, SpringSpacing.Horizontal.lg)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + msg.duration) {
-                            withAnimation(.easeOut(duration: 0.25)) {
-                                message = nil
-                            }
+                    .task(id: msg) {
+                        // Give VoiceOver users extra time to hear the announcement
+                        let delay = voiceOverEnabled ? msg.duration * 2.5 : msg.duration
+                        try? await Task.sleep(for: .seconds(delay))
+                        withAnimation(.easeOut(duration: 0.25)) {
+                            message = nil
                         }
                     }
             }

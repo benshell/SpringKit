@@ -18,12 +18,12 @@ import SwiftUI
 /// Divider()
 ///     .foregroundStyle(SpringColor.Object.border)
 /// ```
-public enum SpringColor {
+@frozen public enum SpringColor {
 
     // MARK: - Text
 
     /// Semantic color tokens for text and typographic elements.
-    public enum Text {
+    @frozen public enum Text {
 
         /// Dominant body and heading text. High contrast against all backgrounds.
         public static let primary = Color("SKTextPrimary", bundle: .module)
@@ -47,7 +47,7 @@ public enum SpringColor {
     // MARK: - Object
 
     /// Semantic color tokens for UI elements: icons, borders, interactive controls.
-    public enum Object {
+    @frozen public enum Object {
 
         /// Primary UI control color — buttons, active indicators, key icons.
         public static let primary = Color("SKObjectPrimary", bundle: .module)
@@ -71,7 +71,7 @@ public enum SpringColor {
     // MARK: - Background
 
     /// Semantic color tokens for view and container backgrounds.
-    public enum Background {
+    @frozen public enum Background {
 
         /// Root screen background — the base canvas.
         public static let primary = Color("SKBackgroundPrimary", bundle: .module)

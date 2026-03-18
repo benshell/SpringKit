@@ -15,7 +15,7 @@ public struct InquiryCard: View {
 
     // MARK: - Data Model
 
-    public struct Inquiry: Identifiable {
+    public struct Inquiry: Identifiable, Sendable {
         public var id: String
         public var subject: String
         public var message: String
@@ -40,7 +40,7 @@ public struct InquiryCard: View {
         }
     }
 
-    public enum Status: String {
+    @frozen public enum Status: String, Sendable {
         case submitted  = "Submitted"
         case inReview   = "In Review"
         case responded  = "Responded"

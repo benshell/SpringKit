@@ -28,7 +28,7 @@ import SwiftUI
 ///     backAction: { dismiss() }
 /// )
 /// ```
-public struct SpringNavigationBar: View {
+public struct SpringNavigationBar<Trailing: View>: View {
 
     // MARK: - Properties
 
@@ -36,7 +36,7 @@ public struct SpringNavigationBar: View {
     private let useAccentFont: Bool
     private let showBackButton: Bool
     private let backAction: (() -> Void)?
-    private let trailingContent: AnyView?
+    private let trailingContent: Trailing?
 
     // MARK: - Init
 
@@ -45,13 +45,13 @@ public struct SpringNavigationBar: View {
         useAccentFont: Bool = false,
         showBackButton: Bool = false,
         backAction: (() -> Void)? = nil,
-        trailingContent: (some View)? = Optional<EmptyView>.none
+        @ViewBuilder trailingContent: () -> Trailing
     ) {
         self.title = title
         self.useAccentFont = useAccentFont
         self.showBackButton = showBackButton
         self.backAction = backAction
-        self.trailingContent = trailingContent.map { AnyView($0) }
+        self.trailingContent = trailingContent()
     }
 
     // MARK: - Body
@@ -89,14 +89,27 @@ public struct SpringNavigationBar: View {
         }
         .padding(.horizontal, SpringSpacing.Horizontal.md)
         .frame(height: 56)
-        .background(SpringColor.Background.primary.opacity(0.92))
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(SpringColor.Object.border)
-                .frame(height: 0.5)
-        }
+        .glassEffect(.regular, in: .rect)
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isHeader)
+    }
+}
+
+// MARK: - Convenience Init (no trailing content)
+
+public extension SpringNavigationBar where Trailing == EmptyView {
+
+    init(
+        title: String,
+        useAccentFont: Bool = false,
+        showBackButton: Bool = false,
+        backAction: (() -> Void)? = nil
+    ) {
+        self.title = title
+        self.useAccentFont = useAccentFont
+        self.showBackButton = showBackButton
+        self.backAction = backAction
+        self.trailingContent = nil
     }
 }
 
@@ -120,11 +133,12 @@ public extension View {
         SpringNavigationBar(
             title: "The Estate",
             useAccentFont: true,
-            showBackButton: false,
-            trailingContent: Button("Book") { }
+            showBackButton: false
+        ) {
+            Button("Book") { }
                 .font(SpringFont.prose(size: SpringFontSize.body, weight: .semibold))
                 .foregroundStyle(SpringColor.Object.primary)
-        )
+        }
 
         SpringNavigationBar(
             title: "Our Menu",

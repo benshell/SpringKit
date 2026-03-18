@@ -15,7 +15,7 @@ import CoreGraphics
 /// SpringSpacing.fixed(20)   // → 160pt
 /// ```
 /// To retheme the entire spacing scale, change ``baseUnit`` in one place.
-public enum SpringSpacing {
+@frozen public enum SpringSpacing {
 
     // MARK: - Base Unit
 
@@ -33,7 +33,7 @@ public enum SpringSpacing {
     // MARK: - Vertical Spacing
 
     /// Named vertical spacing tokens for padding, gaps, and section rhythm.
-    public enum Vertical {
+    @frozen public enum Vertical {
 
         /// 4pt — tight inline gaps (icon-to-label, badge padding).
         public static let xs: CGFloat = 4
@@ -57,7 +57,7 @@ public enum SpringSpacing {
     // MARK: - Horizontal Spacing
 
     /// Named horizontal spacing tokens for screen margins and content insets.
-    public enum Horizontal {
+    @frozen public enum Horizontal {
 
         /// 4pt — tight inline gaps (icon-to-label, chip padding).
         public static let xs: CGFloat = 4
@@ -81,7 +81,7 @@ public enum SpringSpacing {
     // MARK: - Corner Radii
 
     /// Standard corner radius tokens for cards, buttons, and inputs.
-    public enum CornerRadius {
+    @frozen public enum CornerRadius {
 
         /// 4pt — subtle rounding for chips and small badges.
         public static let xs: CGFloat = 4

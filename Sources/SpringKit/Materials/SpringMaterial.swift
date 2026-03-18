@@ -16,7 +16,7 @@ import SwiftUI
 ///     .springGlass(.forest, cornerRadius: 20)
 ///
 /// // Group multiple glass views so they merge their edges
-/// SpringGlassContainer {
+/// SpringGlassContainer(spacing: 20) {
 ///     TopPanel()
 ///     BottomPanel()
 /// }
@@ -25,20 +25,28 @@ import SwiftUI
 /// Color.clear
 ///     .springFrostedOverlay()
 /// ```
-public enum SpringMaterial {
+@frozen public enum SpringMaterial {
 
     /// Available SpringKit glass variants.
-    public enum Variant {
+    @frozen public enum Variant: Sendable {
         /// Standard Liquid Glass — general surfaces, cards, panels.
         case `default`
-        /// Thin glass — lightweight overlays and secondary panels.
-        case thin
-        /// Thick glass — prominent cards and modal surfaces.
-        case thick
         /// Forest-tinted glass — navigation bars and brand-forward surfaces.
         case forest
         /// Harvest-orange tinted glass — call-to-action highlights.
         case harvest
+
+        /// Returns the configured `Glass` value for this variant.
+        var glass: Glass {
+            switch self {
+            case .default:
+                .regular
+            case .forest:
+                .regular.tint(SpringColor.Object.primary)
+            case .harvest:
+                .regular.tint(SpringColor.Object.accent)
+            }
+        }
     }
 }
 
@@ -90,22 +98,7 @@ private struct SpringGlassModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
-            .overlay(variantTint(cornerRadius: cornerRadius))
-    }
-
-    @ViewBuilder
-    private func variantTint(cornerRadius: CGFloat) -> some View {
-        switch variant {
-        case .default, .thin, .thick:
-            EmptyView()
-        case .forest:
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(SpringColor.Object.primary.opacity(0.12))
-        case .harvest:
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(SpringColor.Object.accent.opacity(0.12))
-        }
+            .glassEffect(variant.glass, in: .rect(cornerRadius: cornerRadius))
     }
 }
 
@@ -116,7 +109,7 @@ private struct SpringGlassCardModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(SpringSpacing.Vertical.md)
-            .glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
+            .glassEffect(variant.glass, in: .rect(cornerRadius: cornerRadius))
             .shadow(
                 color: SpringColor.Object.primary.opacity(0.08),
                 radius: 12,
@@ -130,7 +123,6 @@ private struct SpringFrostedOverlayModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .glassEffect(.regular, in: .rect)
-            .opacity(0.85)
     }
 }
 
@@ -146,22 +138,32 @@ private struct SpringNavigationMaterialModifier: ViewModifier {
 /// A container that groups multiple glass-effect views so their edges merge
 /// into a single unified Liquid Glass surface (iOS 26 behavior).
 ///
+/// The `spacing` parameter controls how close shapes need to be before they
+/// begin blending together. See `GlassEffectContainer` documentation.
+///
 /// ```swift
-/// SpringGlassContainer {
+/// SpringGlassContainer(spacing: 20) {
 ///     HeaderBar()
 ///     ContentPanel()
 /// }
 /// ```
 public struct SpringGlassContainer<Content: View>: View {
 
+    private let spacing: CGFloat?
     private let content: Content
 
-    public init(@ViewBuilder content: () -> Content) {
+    /// Creates a glass container that merges child glass shapes.
+    ///
+    /// - Parameters:
+    ///   - spacing: Controls blending distance between glass shapes. `nil` uses the system default.
+    ///   - content: The child views that contain `glassEffect` modifiers.
+    public init(spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) {
+        self.spacing = spacing
         self.content = content()
     }
 
     public var body: some View {
-        GlassEffectContainer {
+        GlassEffectContainer(spacing: spacing) {
             content
         }
     }

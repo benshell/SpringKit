@@ -64,8 +64,6 @@ struct TokensTab: View {
 
                     VStack(spacing: SpringSpacing.Vertical.md) {
                         materialRow(label: ".default", variant: .default)
-                        materialRow(label: ".thin", variant: .thin)
-                        materialRow(label: ".thick", variant: .thick)
                         materialRow(label: ".forest", variant: .forest)
                         materialRow(label: ".harvest", variant: .harvest)
                     }
@@ -117,7 +115,7 @@ struct TokensTab: View {
         }
     }
 
-    private func typographyRow(label: String, text: String, size: CGFloat, isAccent: Bool) -> some View {
+    private func typographyRow(label: String, text: String, size: SpringFontSize.Token, isAccent: Bool) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(label)
                 .springProseFont(size: SpringFontSize.caption, weight: .regular)

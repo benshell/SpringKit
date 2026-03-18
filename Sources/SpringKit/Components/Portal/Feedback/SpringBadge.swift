@@ -11,7 +11,7 @@ public struct SpringBadge: View {
 
     // MARK: - Style
 
-    public enum Style {
+    @frozen public enum Style: Sendable {
         case success
         case warning
         case destructive
@@ -21,7 +21,7 @@ public struct SpringBadge: View {
 
     // MARK: - Variant
 
-    public enum Variant {
+    @frozen public enum Variant: Sendable {
         /// Pill with label text.
         case pill
         /// Small filled circle, no text.

@@ -11,7 +11,7 @@ public struct SpringLoadingView: View {
 
     // MARK: - Style
 
-    public enum Style {
+    @frozen public enum Style: Sendable {
         /// Inline spinner with optional label — use inside cards and forms.
         case inline
         /// Full-screen overlay with glass background.
@@ -83,7 +83,7 @@ public struct SpringLoadingView: View {
         ProgressView()
             .progressViewStyle(.circular)
             .tint(SpringColor.Object.primary)
-            .scaleEffect(1.2)
+            .scaleEffect(reduceMotion ? 1.0 : 1.2)
     }
 }
 

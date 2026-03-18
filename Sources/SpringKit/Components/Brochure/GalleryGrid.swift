@@ -14,7 +14,7 @@ public struct GalleryGrid: View {
 
     // MARK: - Layout
 
-    public enum Layout {
+    @frozen public enum Layout: Sendable {
         /// All images displayed at the same fixed height.
         case uniform(imageHeight: CGFloat)
         /// Two-column masonry where images alternate between a taller and shorter height.
@@ -58,10 +58,18 @@ public struct GalleryGrid: View {
 
         LazyVGrid(columns: gridColumns, spacing: spacing) {
             ForEach(images.indices, id: \.self) { index in
-                imageCell(at: index)
-                    .onTapGesture { onSelect?(index) }
+                if let onSelect {
+                    Button {
+                        onSelect(index)
+                    } label: {
+                        imageCell(at: index)
+                    }
+                    .buttonStyle(.plain)
                     .accessibilityLabel("Photo \(index + 1) of \(images.count)")
-                    .accessibilityAddTraits(onSelect != nil ? .isButton : [])
+                } else {
+                    imageCell(at: index)
+                        .accessibilityLabel("Photo \(index + 1) of \(images.count)")
+                }
             }
         }
     }

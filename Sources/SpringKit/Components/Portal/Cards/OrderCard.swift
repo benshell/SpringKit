@@ -127,9 +127,14 @@ public struct OrderCard: View {
         .accessibilityLabel("\(item.name), \(priceFormatted)\(item.isAvailable ? "" : ", unavailable")")
     }
 
-    private var priceFormatted: String {
+    private static let priceFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        return formatter
+    }()
+
+    private var priceFormatted: String {
+        let formatter = Self.priceFormatter
         formatter.currencyCode = item.currency
         return formatter.string(from: item.price as NSDecimalNumber) ?? "\(item.price)"
     }
@@ -144,7 +149,7 @@ public struct OrderCard: View {
                     Image(systemName: "minus")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(SpringColor.Object.primary)
-                        .frame(width: 32, height: 32)
+                        .frame(width: SpringSpacing.minimumTapTarget, height: SpringSpacing.minimumTapTarget)
                 }
                 .accessibilityLabel("Remove one \(item.name)")
 
@@ -160,7 +165,7 @@ public struct OrderCard: View {
                     Image(systemName: "plus")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(SpringColor.Text.inverted)
-                        .frame(width: 32, height: 32)
+                        .frame(width: SpringSpacing.minimumTapTarget, height: SpringSpacing.minimumTapTarget)
                         .background(SpringColor.Object.primary, in: .circle)
                 }
                 .accessibilityLabel("Add one more \(item.name)")
@@ -172,7 +177,7 @@ public struct OrderCard: View {
                 Image(systemName: "plus")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(SpringColor.Text.inverted)
-                    .frame(width: 32, height: 32)
+                    .frame(width: SpringSpacing.minimumTapTarget, height: SpringSpacing.minimumTapTarget)
                     .background(SpringColor.Object.primary, in: .circle)
             }
             .accessibilityLabel("Add \(item.name) to order")

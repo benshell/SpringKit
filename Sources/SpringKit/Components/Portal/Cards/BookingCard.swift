@@ -15,7 +15,7 @@ public struct BookingCard: View {
 
     // MARK: - Data Model
 
-    public struct Booking: Identifiable {
+    public struct Booking: Identifiable, Sendable {
         public var id: String
         public var venueName: String
         public var date: Date
@@ -40,7 +40,7 @@ public struct BookingCard: View {
         }
     }
 
-    public enum Status: String {
+    @frozen public enum Status: String, Sendable {
         case pending   = "Pending"
         case confirmed = "Confirmed"
         case cancelled = "Cancelled"

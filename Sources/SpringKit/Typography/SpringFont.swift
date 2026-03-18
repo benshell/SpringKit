@@ -10,9 +10,12 @@ import CoreText
 ///   by TypeSETit (SIL Open Font License). Used sparingly for decorative headings,
 ///   hero text, and section headers to evoke elegance and occasion.
 ///
+/// All fonts scale with Dynamic Type via the `relativeTo` text style in each
+/// ``SpringFontSize/Token``.
+///
 /// ## Usage
 /// ```swift
-/// // System prose font
+/// // System prose font (scales with Dynamic Type)
 /// Text("Reserve a Table")
 ///     .font(SpringFont.prose(size: SpringFontSize.heading2, weight: .semibold))
 ///
@@ -24,7 +27,7 @@ import CoreText
 /// Text("Welcome").springAccentFont(size: SpringFontSize.hero)
 /// Text("Your booking").springProseFont(size: SpringFontSize.body)
 /// ```
-public enum SpringFont {
+@frozen public enum SpringFont {
 
     // MARK: - Font Registration
 
@@ -47,27 +50,29 @@ public enum SpringFont {
 
     // MARK: - Prose (SF Pro)
 
-    /// Returns an SF Pro system font at the given size and weight.
+    /// Returns an SF Pro system font at the given size and weight, scaled with Dynamic Type.
     ///
     /// - Parameters:
-    ///   - size: Point size. Use a ``SpringFontSize`` constant or ``SpringSpacing/fixed(_:)``.
+    ///   - size: A ``SpringFontSize/Token`` providing the base point size and text style to scale relative to.
     ///   - weight: Font weight. Defaults to `.regular`.
-    public static func prose(size: CGFloat, weight: Font.Weight = .regular) -> Font {
-        .system(size: size, weight: weight, design: .default)
+    public static func prose(size: SpringFontSize.Token, weight: Font.Weight = .regular) -> Font {
+        .system(size: size.base, weight: weight, design: .default)
+            .leading(.standard)
     }
 
     // MARK: - Accent (Great Vibes)
 
-    /// Returns the Great Vibes cursive font at the given size.
+    /// Returns the Great Vibes cursive font at the given size, scaled with Dynamic Type.
     ///
     /// This font should be used **sparingly** — decorative headings and hero text only.
     /// It is not suitable for body copy, UI labels, or interactive elements.
     ///
-    /// - Parameter size: Point size. ``SpringFontSize/display`` and ``SpringFontSize/hero``
-    ///   are the recommended sizes. Avoid using below ``SpringFontSize/heading2``.
-    public static func accent(size: CGFloat) -> Font {
+    /// - Parameter size: A ``SpringFontSize/Token``. ``SpringFontSize/display`` and
+    ///   ``SpringFontSize/hero`` are the recommended sizes. Avoid using below
+    ///   ``SpringFontSize/heading2``.
+    public static func accent(size: SpringFontSize.Token) -> Font {
         _ = _fontRegistration
-        return .custom("GreatVibes-Regular", size: size)
+        return .custom("GreatVibes-Regular", size: size.base, relativeTo: size.relativeTo)
     }
 }
 
@@ -76,14 +81,14 @@ public enum SpringFont {
 public extension View {
 
     /// Applies the SF Pro system font with the specified size and weight.
-    func springProseFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
+    func springProseFont(size: SpringFontSize.Token, weight: Font.Weight = .regular) -> some View {
         self.font(SpringFont.prose(size: size, weight: weight))
     }
 
     /// Applies the Great Vibes accent font at the specified size.
     ///
     /// Use only for decorative display text. Not suitable for body copy or UI labels.
-    func springAccentFont(size: CGFloat) -> some View {
+    func springAccentFont(size: SpringFontSize.Token) -> some View {
         self.font(SpringFont.accent(size: size))
     }
 }
