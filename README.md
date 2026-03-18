@@ -1,8 +1,15 @@
 # SpringKit
 
+*An elegant SwiftUI design system for iOS*
+
+![Platform](https://img.shields.io/badge/Platform-iOS_26%2B-blue?logo=apple&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-6.0-orange?logo=swift&logoColor=white)
+![SPM](https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen?logo=swift&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 <img src="Media/demo.gif" alt="SpringKit demo app cycling through Brochure, Controls, Cards, Feedback, and Tokens tabs" width="300" align="right" style="padding-left: 16px">
 
-A SwiftUI design system for iOS — built for vineyard estates, wedding venues, and upscale restaurants. SpringKit provides a complete design foundation: semantic color tokens, typography, spacing, Liquid Glass materials, and a full library of pre-built SwiftUI components, all in one zero-dependency Swift package.
+A SwiftUI design system for iOS — suitable for organizations like vineyard estates, wedding venues, and upscale restaurants. SpringKit provides a complete design foundation: semantic color tokens, typography, spacing, Liquid Glass materials, and a full library of pre-built SwiftUI components, all in one zero-dependency Swift package.
 
 **The aesthetic:** deep forest greens as the dominant brand color, harvest orange and champagne gold as accents, warm parchment as the background. Refined, natural, and celebratory — like a handwritten wedding invitation or a fine restaurant menu.
 
@@ -26,7 +33,7 @@ Add SpringKit to your project via Swift Package Manager.
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org/SpringKit", from: "1.0.0")
+    .package(url: "https://github.com/benshell/SpringKit", from: "1.0.0")
 ],
 targets: [
     .target(
