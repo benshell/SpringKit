@@ -1,12 +1,12 @@
 # SpringKit
 
-A SwiftUI design system for iOS — built for vineyard estates, wedding venues, and upscale restaurants. SpringKit provides a complete design foundation: semantic color tokens, typography, spacing, Liquid Glass materials, and a full library of pre-built SwiftUI components, all in one zero-dependency Swift package.
+<img src="Media/demo.gif" alt="SpringKit demo app cycling through Brochure, Controls, Cards, Feedback, and Tokens tabs" width="300" align="right" style="padding-left: 16px">
 
-<img src="Media/demo.gif" alt="SpringKit demo app cycling through Brochure, Controls, Cards, Feedback, and Tokens tabs" width="300" align="right">
+A SwiftUI design system for iOS — built for vineyard estates, wedding venues, and upscale restaurants. SpringKit provides a complete design foundation: semantic color tokens, typography, spacing, Liquid Glass materials, and a full library of pre-built SwiftUI components, all in one zero-dependency Swift package.
 
 **The aesthetic:** deep forest greens as the dominant brand color, harvest orange and champagne gold as accents, warm parchment as the background. Refined, natural, and celebratory — like a handwritten wedding invitation or a fine restaurant menu.
 
----
+<br clear="right">
 
 ## Requirements
 
@@ -15,8 +15,6 @@ A SwiftUI design system for iOS — built for vineyard estates, wedding venues, 
 | iOS | 26.0 |
 | Swift | 6.0 |
 | Xcode | 26.0+ |
-
----
 
 ## Installation
 
@@ -43,8 +41,6 @@ targets: [
 ```swift
 .package(path: "../SpringKit")
 ```
-
----
 
 ## Quick Start
 
@@ -77,8 +73,6 @@ struct ReservationView: View {
     }
 }
 ```
-
----
 
 ## Design Tokens
 
@@ -150,8 +144,6 @@ SpringSpacing.Vertical.lg     // 24pt — between related components
 SpringSpacing.Vertical.xl     // 40pt — section breaks
 SpringSpacing.fixed(3)        // 24pt — base-8 multiplier utility
 ```
-
----
 
 ## Components
 
@@ -253,8 +245,6 @@ SpringTabView(selection: $selectedTab) {
 }
 ```
 
----
-
 ## Liquid Glass Materials (iOS 26)
 
 SpringKit wraps iOS 26's Liquid Glass in `SpringMaterial` for consistent brand coloring.
@@ -271,8 +261,6 @@ myView.springGlassCard(cornerRadius: 20)
 // Modal backdrop
 myView.springFrostedOverlay(opacity: 0.4)
 ```
-
----
 
 ## Demo App
 
@@ -297,15 +285,13 @@ Open `Examples/SpringKitDemo/SpringKitDemo.xcodeproj` in Xcode. SpringKit is imp
 
 <table>
   <tr>
-    <td align="center"><img src="Media/screenshots/tab-brochure.png" width="160" alt="Brochure tab"><br><sub>Brochure</sub></td>
-    <td align="center"><img src="Media/screenshots/tab-controls.png" width="160" alt="Controls tab"><br><sub>Controls</sub></td>
-    <td align="center"><img src="Media/screenshots/tab-cards.png" width="160" alt="Cards tab"><br><sub>Cards</sub></td>
-    <td align="center"><img src="Media/screenshots/tab-feedback.png" width="160" alt="Feedback tab"><br><sub>Feedback</sub></td>
-    <td align="center"><img src="Media/screenshots/tab-tokens.png" width="160" alt="Tokens tab"><br><sub>Tokens</sub></td>
+    <td align="center" style="padding: 8px"><img src="Media/screenshots/tab-brochure.png" width="160" alt="Brochure tab"><br><sub>Brochure</sub></td>
+    <td align="center" style="padding: 8px"><img src="Media/screenshots/tab-controls.png" width="160" alt="Controls tab"><br><sub>Controls</sub></td>
+    <td align="center" style="padding: 8px"><img src="Media/screenshots/tab-cards.png" width="160" alt="Cards tab"><br><sub>Cards</sub></td>
+    <td align="center" style="padding: 8px"><img src="Media/screenshots/tab-feedback.png" width="160" alt="Feedback tab"><br><sub>Feedback</sub></td>
+    <td align="center" style="padding: 8px"><img src="Media/screenshots/tab-tokens.png" width="160" alt="Tokens tab"><br><sub>Tokens</sub></td>
   </tr>
 </table>
-
----
 
 ## Package Structure
 
@@ -333,8 +319,6 @@ Sources/SpringKit/
         └── Feedback/
 ```
 
----
-
 ## Accessibility
 
 - All color pairs meet **WCAG AA** contrast (4.5:1 for normal text, 3:1 for large text); AAA is targeted wherever practical
@@ -343,8 +327,6 @@ Sources/SpringKit/
 - Every interactive element has a minimum **44×44pt** tap target
 - Components declare `accessibilityLabel`, `accessibilityHint`, and `accessibilityRole` as appropriate
 - Animations respect `AccessibilityReduceMotion`
-
----
 
 ## License
 
