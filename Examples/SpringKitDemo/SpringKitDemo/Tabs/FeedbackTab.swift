@@ -47,7 +47,7 @@ struct FeedbackTab: View {
                             .foregroundStyle(SpringColor.Text.secondary)
                             .padding(.horizontal, SpringSpacing.Horizontal.md)
 
-                        ScrollView(.horizontal, showsIndicators: false) {
+                        ScrollView(.horizontal) {
                             HStack(spacing: SpringSpacing.Horizontal.sm) {
                                 SpringBadge("Confirmed", style: .success)
                                 SpringBadge("Pending", style: .warning)
@@ -57,6 +57,7 @@ struct FeedbackTab: View {
                             }
                             .padding(.horizontal, SpringSpacing.Horizontal.md)
                         }
+                        .scrollIndicators(.hidden)
 
                         Text("Dot badges")
                             .springProseFont(size: SpringFontSize.footnote, weight: .semibold)
@@ -113,10 +114,6 @@ struct FeedbackTab: View {
 
                         SecondaryButton("Show Overlay Loader (3 s)", isFullWidth: true) {
                             showOverlayLoader = true
-                            Task {
-                                try? await Task.sleep(for: .seconds(3))
-                                showOverlayLoader = false
-                            }
                         }
                     }
                     .padding(.horizontal, SpringSpacing.Horizontal.md)
@@ -124,11 +121,15 @@ struct FeedbackTab: View {
                 .padding(.vertical, SpringSpacing.Vertical.md)
                 .readableContentWidth()
             }
-            .background(SpringColor.Background.primary)
             .navigationTitle("Feedback & Status")
-            .navigationBarTitleDisplayMode(.inline)
             .springToast($toastMessage)
             .springLoadingOverlay(isLoading: showOverlayLoader, message: "Please wait…")
+            .task(id: showOverlayLoader) {
+                guard showOverlayLoader else { return }
+                try? await Task.sleep(for: .seconds(3))
+                guard !Task.isCancelled else { return }
+                showOverlayLoader = false
+            }
         }
     }
 }

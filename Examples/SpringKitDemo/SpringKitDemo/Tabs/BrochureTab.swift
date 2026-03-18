@@ -35,7 +35,7 @@ struct BrochureTab: View {
                         useAccentFont: true
                     )
 
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    ScrollView(.horizontal) {
                         HStack(spacing: SpringSpacing.Horizontal.md) {
                             ForEach(DemoContent.features) { feature in
                                 FeatureCard(
@@ -48,6 +48,7 @@ struct BrochureTab: View {
                         }
                         .padding(.horizontal, SpringSpacing.Horizontal.md)
                     }
+                    .scrollIndicators(.hidden)
 
                     SectionHeader(
                         title: "Guest Experiences",
@@ -84,9 +85,7 @@ struct BrochureTab: View {
                 }
                 .padding(.bottom, SpringSpacing.Vertical.xl)
             }
-            .background(SpringColor.Background.primary)
             .navigationTitle("Brochure Components")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 

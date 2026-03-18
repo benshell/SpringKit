@@ -72,9 +72,7 @@ struct TokensTab: View {
                 .padding(.vertical, SpringSpacing.Vertical.md)
                 .readableContentWidth(900)
             }
-            .background(SpringColor.Background.primary)
             .navigationTitle("Design Tokens")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
@@ -145,7 +143,7 @@ struct TokensTab: View {
                 Rectangle()
                     .fill(SpringColor.Object.secondary)
                     .frame(width: value, height: 20)
-                    .cornerRadius(2)
+                    .clipShape(RoundedRectangle(cornerRadius: 2))
                 Spacer()
             }
 
@@ -156,9 +154,14 @@ struct TokensTab: View {
     }
 
     private func materialRow(label: String, variant: SpringMaterial.Variant) -> some View {
-        Text(label)
+        let textColor: Color = switch variant {
+        case .forest: SpringColor.Text.inverted
+        default: SpringColor.Text.primary
+        }
+
+        return Text(label)
             .springProseFont(size: SpringFontSize.body, weight: .medium)
-            .foregroundStyle(SpringColor.Text.primary)
+            .foregroundStyle(textColor)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(SpringSpacing.Vertical.md)
             .springGlassCard(variant, cornerRadius: SpringSpacing.CornerRadius.md)

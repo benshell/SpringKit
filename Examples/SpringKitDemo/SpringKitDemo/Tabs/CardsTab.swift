@@ -85,9 +85,7 @@ struct CardsTab: View {
                 }
                 .padding(.vertical, SpringSpacing.Vertical.md)
             }
-            .background(SpringColor.Background.primary)
             .navigationTitle("Cards")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

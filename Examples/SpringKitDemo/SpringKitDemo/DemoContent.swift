@@ -20,9 +20,9 @@ enum DemoContent {
 
     static var heroImage: Image {
         gradientImage(colors: [
-            Color(red: 0.10, green: 0.18, blue: 0.12),
-            Color(red: 0.18, green: 0.42, blue: 0.31),
-            Color(red: 0.29, green: 0.60, blue: 0.44),
+            SpringColor.Object.primary,
+            SpringColor.Object.secondary,
+            SpringColor.Text.link,
         ])
     }
 
@@ -30,12 +30,12 @@ enum DemoContent {
 
     static var galleryImages: [Image] {
         let palettes: [[Color]] = [
-            [Color(red: 0.18, green: 0.42, blue: 0.31), Color(red: 0.10, green: 0.18, blue: 0.12)],
-            [Color(red: 0.83, green: 0.41, blue: 0.18), Color(red: 0.77, green: 0.64, blue: 0.35)],
-            [Color(red: 0.77, green: 0.64, blue: 0.35), Color(red: 0.29, green: 0.60, blue: 0.44)],
-            [Color(red: 0.10, green: 0.18, blue: 0.12), Color(red: 0.36, green: 0.49, blue: 0.35)],
-            [Color(red: 0.97, green: 0.95, blue: 0.93), Color(red: 0.83, green: 0.41, blue: 0.18)],
-            [Color(red: 0.29, green: 0.60, blue: 0.44), Color(red: 0.97, green: 0.95, blue: 0.93)],
+            [SpringColor.Object.secondary, SpringColor.Object.primary],
+            [SpringColor.Object.accent, SpringColor.Object.champagne],
+            [SpringColor.Object.champagne, SpringColor.Text.link],
+            [SpringColor.Object.primary, SpringColor.Object.secondary],
+            [SpringColor.Background.primary, SpringColor.Object.accent],
+            [SpringColor.Text.link, SpringColor.Background.primary],
         ]
         return palettes.map { gradientImage(colors: $0, width: 300, height: 300) }
     }
@@ -146,7 +146,7 @@ enum DemoContent {
                 price: 38.00,
                 category: "Mains",
                 image: gradientImage(
-                    colors: [Color(red: 0.5, green: 0.25, blue: 0.1), Color(red: 0.8, green: 0.5, blue: 0.2)],
+                    colors: [SpringColor.Object.primary, SpringColor.Object.accent],
                     width: 120, height: 120
                 )
             ),
@@ -157,7 +157,7 @@ enum DemoContent {
                 price: 28.00,
                 category: "Mains",
                 image: gradientImage(
-                    colors: [Color(red: 0.8, green: 0.7, blue: 0.2), Color(red: 0.9, green: 0.85, blue: 0.4)],
+                    colors: [SpringColor.Object.champagne, SpringColor.Background.accent],
                     width: 120, height: 120
                 )
             ),
@@ -168,7 +168,7 @@ enum DemoContent {
                 price: 14.00,
                 category: "Desserts",
                 image: gradientImage(
-                    colors: [Color(red: 0.6, green: 0.4, blue: 0.8), Color(red: 0.85, green: 0.65, blue: 0.9)],
+                    colors: [SpringColor.Text.muted, SpringColor.Object.border],
                     width: 120, height: 120
                 ),
                 isAvailable: false

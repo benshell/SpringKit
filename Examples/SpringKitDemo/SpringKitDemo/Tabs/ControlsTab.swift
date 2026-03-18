@@ -101,9 +101,7 @@ struct ControlsTab: View {
                 .padding(.vertical, SpringSpacing.Vertical.md)
                 .readableContentWidth()
             }
-            .background(SpringColor.Background.primary)
             .navigationTitle("Controls")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
