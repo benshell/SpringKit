@@ -24,6 +24,33 @@ import SwiftUI
             self.base = base
             self.relativeTo = relativeTo
         }
+
+        /// The default system point size for ``relativeTo`` at the standard
+        /// Dynamic Type setting. Used to compute the scale factor when
+        /// creating system fonts that scale with Dynamic Type.
+        var defaultSystemSize: CGFloat {
+            switch relativeTo {
+            case .largeTitle:   34
+            case .title:        28
+            case .title2:       22
+            case .title3:       20
+            case .headline:     17
+            case .body:         17
+            case .callout:      16
+            case .subheadline:  15
+            case .footnote:     13
+            case .caption:      12
+            case .caption2:     11
+            @unknown default:   17
+            }
+        }
+
+        /// The multiplier needed to reach ``base`` from the default size
+        /// of ``relativeTo``. A value of `1.0` means the token's base size
+        /// matches the text style's default size exactly.
+        var scaleFactor: CGFloat {
+            base / defaultSystemSize
+        }
     }
 
     // MARK: - Text Sizes

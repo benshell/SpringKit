@@ -56,7 +56,8 @@ import CoreText
     ///   - size: A ``SpringFontSize/Token`` providing the base point size and text style to scale relative to.
     ///   - weight: Font weight. Defaults to `.regular`.
     public static func prose(size: SpringFontSize.Token, weight: Font.Weight = .regular) -> Font {
-        .system(size: size.base, weight: weight, design: .default)
+        .system(size.relativeTo, design: .default, weight: weight)
+            .scaled(by: size.scaleFactor)
             .leading(.standard)
     }
 
